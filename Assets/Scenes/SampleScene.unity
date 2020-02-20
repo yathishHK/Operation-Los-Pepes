@@ -313,6 +313,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d974c9e4d4e7b044a98a7e87ff732c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1526299083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8293380413566525218, guid: 6690d41940b9d9d4ea8f47b4069a5944,
+    type: 3}
+  m_PrefabInstance: {fileID: 6610944388716133486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1613311375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -800,7 +812,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7515029278537329522, guid: c1508bf770960cd48afd4cc7c95b481d,
+    - target: {fileID: 876848700445377480, guid: c1508bf770960cd48afd4cc7c95b481d,
+        type: 3}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 1526299083}
+    - target: {fileID: 7515029278537329426, guid: c1508bf770960cd48afd4cc7c95b481d,
         type: 3}
       propertyPath: m_IsActive
       value: 1

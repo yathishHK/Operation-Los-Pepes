@@ -63,22 +63,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void ControlInAir()
-    {
-        if (!isGrounded && moveInAir)
-        {
-            //frameRateCount--;
-            //if (frameRateCount == 0)
-                moveInAir = false;
-        }
-
-        else if (isGrounded)
-        {
-            moveInAir = true;
-            //frameRateCount = 5;
-        }
-    }
-
     private void PlayerRotaion()
     {
         if(Input.touchCount > 0)
@@ -89,24 +73,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerLookAround()
     {
-        foreach (Touch touch in Input.touches)
+        //if (moveInAir)
         {
-            if (IsTouchOverUI(touch))
+            foreach (Touch touch in Input.touches)
             {
-                if (touch.phase == TouchPhase.Began)
+                if (IsTouchOverUI(touch))
                 {
-                    startTouchPosition = touch.position;
-                }
-                else if (touch.phase == TouchPhase.Moved)
-                {
-                    currentRotationPosition = touch.position - startTouchPosition;
-                    startTouchPosition = touch.position;
-                    screenPosX = currentRotationPosition.x * sensivity * Time.deltaTime;
-                    screenPosY = currentRotationPosition.y * sensivity * Time.deltaTime;
-                    transform.Rotate(Vector3.up * screenPosX);
-                    xRotation -= screenPosY;
-                    xRotation = Mathf.Clamp(xRotation, -45f, 45f);
-                    playerCamera.transform.localEulerAngles = new Vector3(xRotation, playerCamera.transform.localEulerAngles.y, playerCamera.transform.localEulerAngles.z);
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        startTouchPosition = touch.position;
+                    }
+                    else if (touch.phase == TouchPhase.Moved)
+                    {
+                        currentRotationPosition = touch.position - startTouchPosition;
+                        startTouchPosition = touch.position;
+                        screenPosX = currentRotationPosition.x * sensivity * Time.deltaTime;
+                        screenPosY = currentRotationPosition.y * sensivity * Time.deltaTime;
+                        transform.Rotate(Vector3.up * screenPosX);
+                        xRotation -= screenPosY;
+                        xRotation = Mathf.Clamp(xRotation, -45f, 45f);
+                        playerCamera.transform.localEulerAngles = new Vector3(xRotation, playerCamera.transform.localEulerAngles.y, playerCamera.transform.localEulerAngles.z);
+                    }
                 }
             }
         }
@@ -143,9 +130,29 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
     }
 
-    public void PlayerSprint()
+    private void ControlInAir()
     {
-        moveInAir = true;
+        if (!isGrounded && moveInAir)
+        {
+            //frameRateCount--;
+            //if (frameRateCount == 0)
+            moveInAir = false;
+        }
+
+        else if (isGrounded)
+        {
+            moveInAir = true;
+            //frameRateCount = 5;
+        }
     }
-    
+
+    public void Fire()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, Vector3.forward, out hit, Mathf.Infinity))
+        {
+            print(hit.transform.name);
+        }
+    }
+
 }

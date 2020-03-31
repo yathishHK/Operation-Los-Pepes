@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float                      jumpHeight = 3f;
     [SerializeField] Camera                     playerCamera;
     [SerializeField] LayerMask                  groundMask;
+    [SerializeField] LayerMask                  mask;
     
 
     float                                       screenPosX = 0f;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     bool                                        isGrounded;
     bool                                        moveInAir = true;
     int                                         frameRateCount = 5;
+    bool                                        buttonIsDown = false;
     
     void Update()
     {
@@ -148,10 +150,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void Fire()
     {
+
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, Vector3.forward, out hit, Mathf.Infinity))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, Mathf.Infinity, mask))
         {
             print(hit.transform.name);
+            Debug.DrawRay(playerCamera.transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
         }
     }
 
